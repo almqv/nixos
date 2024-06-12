@@ -81,6 +81,7 @@
   };
 
   programs.firefox.enable = true;
+  programs.nano.enable = false;
 
   environment.systemPackages = with pkgs; [
     vim
