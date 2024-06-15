@@ -59,9 +59,11 @@
     };
     grub = {
       enable = true;
+      useOSProber = true;
       efiSupport = true;
       device = "nodev";
     };
+    initrd.luks.devices.cryptroot.device = "/dev/disk/by-uuid/d20cfef0-f05c-4e5a-8962-b255e4e56d49";
   };
 
   networking.hostName = "epsilon"; # Define your hostname.
