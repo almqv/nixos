@@ -6,7 +6,37 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+
+let
+  # Import the dotfiles mapping function
+  dotfilesMap = import ./dotfiles.nix { inherit lib; };
+
+  # Specify the dotfiles directory
+  dotfilesDir = "${config.home.homeDirectory}/.dotfiles";
+
+  # Map the dotfiles
+  dotfiles = dotfilesMap (builtins.toPath dotfilesDir);
+
+  # Function to create home.file entries
+  mkHomeFile = name: attrs:
+    if attrs.type == "file" then
+      {
+        "home.file.${name}".source = attrs.path;
+        "home.file.${name}".target = "${config.home.homeDirectory}/.${name}";
+      }
+    else if attrs.type == "directory" then
+      {
+        "home.file.${name}".source = attrs.path;
+        "home.file.${name}".target = "${config.home.homeDirectory}/.${name}";
+        "home.file.${name}".recursive = true;
+      }
+    else {};
+
+  # Import the clone-dotfiles script
+  cloneDotfiles = import ./dotfiles-repo.nix { inherit pkgs lib; };
+in
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
@@ -41,22 +71,31 @@
   home = {
     username = "elal";
     homeDirectory = "/home/elal";
+
+    # Clone the dotfiles repo if necessary
+    activation = {
+      inherit cloneDotfiles;
+    };
+
+    # Map dotfiles to home.file entries
+    files = lib.flatten (lib.mapAttrsToList mkHomeFile dotfiles.dotfiles);
+
+    # Add stuff for your user as you see fit:
+    # programs.neovim.enable = true;
+    packages = with pkgs; [ 
+      # steam 
+      slack
+    ];
+
+    # Enable home-manager and git
+    programs.home-manager.enable = true;
+    programs.git.enable = true;
+
+    # Nicely reload system units when changing configs
+    systemd.user.startServices = "sd-switch";
+
+    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    stateVersion = "23.11"; 
   };
-
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  home.packages = with pkgs; [ 
-    # steam 
-    slack
-  ];
-
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.11"; 
 }
+
