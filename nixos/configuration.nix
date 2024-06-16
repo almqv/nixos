@@ -112,6 +112,10 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # systemd-homed
+  services.homed.enable = true;
+  services.nscd.enable = true;
+
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -157,13 +161,12 @@
   programs.firefox.enable = true;
 
   # NeoVim
-  programs.neovim.enable = true;
-  programs.neovim.defaultEditor = true;
-  programs.neovim.viAlias = true;
-  programs.neovim.vimAlias = true;
-
-  # Gnome terminal
-  programs.gnome-terminal.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -174,6 +177,7 @@
      wget
      curl
      git
+     htop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
