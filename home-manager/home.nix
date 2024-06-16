@@ -55,6 +55,7 @@
     slack
     zathura
     irssi
+    spotify
 
     # Development 
     nodejs_22
