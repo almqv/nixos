@@ -55,13 +55,14 @@
   boot.loader = { 
     efi = {
       canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
+      # efiSysMountPoint = "/boot/efi";
     };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-    };
+    systemd-boot.enable = true;
+#     grub = {
+#       enable = true;
+#       efiSupport = true;
+#       device = "nodev";
+#     };
   };
 
   networking.hostName = "epsilon"; # Define your hostname.
@@ -160,6 +161,9 @@
   programs.neovim.defaultEditor = true;
   programs.neovim.viAlias = true;
   programs.neovim.vimAlias = true;
+
+  # Gnome terminal
+  programs.gnome-terminal.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
