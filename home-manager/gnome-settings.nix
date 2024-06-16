@@ -1,11 +1,6 @@
 # gnome-settings.nix
 
 {
-  "org/gnome/desktop/input-sources" = {
-    sources = [ ("xkb" "se") ];
-    xkb-options = [ "terminate:ctrl_alt_bksp" ];
-  };
-
   "org/gnome/desktop/interface" = {
     color-scheme = "prefer-dark";
   };

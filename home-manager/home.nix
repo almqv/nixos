@@ -14,7 +14,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./gnome-settings.nix
+    # ./gnome-settings.nix
   ];
 
   nixpkgs = {
@@ -45,16 +45,38 @@
   };
 
   # Use these predefined settings for gnome
-  dconf.settings = import ./gnome-settings.nix;
+  # dconf.settings = import ./gnome-settings.nix;
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [ 
+    # Programs
     # steam 
     slack
     zathura
     irssi
+
+    # Development 
+    nodejs_22
+    pnpm
+    rustup
+    gcc
+    gnumake
+    lua
+    python3
+    python2
+    pipx
+    go
+
+    # Binaries
+    unzip
     stow
+
+    # Fonts
+    nerdfonts
+    
+    # DE
+    gnome.gnome-tweaks
   ];
 
   # Enable home-manager and git
