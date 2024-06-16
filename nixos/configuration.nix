@@ -113,8 +113,8 @@
   services.printing.enable = true;
 
   # systemd-homed
-  # services.homed.enable = true;
-  # services.nscd.enable = true;
+  services.homed.enable = true;
+  services.nscd.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
