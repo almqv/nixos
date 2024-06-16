@@ -14,6 +14,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./gnome-settings.nix
   ];
 
   nixpkgs = {
@@ -43,11 +44,17 @@
     homeDirectory = "/home/elal";
   };
 
+  # Use these predefined settings for gnome
+  dconf.settings = import ./gnome-settings.nix;
+
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [ 
     # steam 
     slack
+    zathura
+    irssi
+    stow
   ];
 
   # Enable home-manager and git
