@@ -58,7 +58,6 @@
 
     # Development 
     nodejs_22
-    pnpm
     rustup
     gcc
     gnumake
