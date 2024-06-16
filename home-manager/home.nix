@@ -48,6 +48,7 @@
   home.packages = with pkgs; [ 
     # steam 
     slack
+    htop
   ];
 
   # Enable home-manager and git
