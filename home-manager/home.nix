@@ -63,7 +63,6 @@
     gnumake
     lua
     python3
-    python2
     pipx
     go
 
