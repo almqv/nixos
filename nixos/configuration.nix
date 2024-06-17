@@ -148,7 +148,6 @@
   # Hyprland
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true; # fuck nvidia
     xwayland.enable = true;
   };
 
@@ -203,6 +202,15 @@
      # System
      home-manager
 
+     # Rice stuff
+     eww          # bar/widgets
+     dunst        # notifications
+     libnotify    # library for notifications
+     swww         # wallpaper
+     alacritty    # terminal
+     kitty        # TODO: remove me
+     rofi-wayland # app launcher
+
      # Development 
      nodejs_22
      rustup
@@ -223,6 +231,10 @@
      unzip
      stow
   ];
+
+  # Desktop portals
+  # xdg.portal.enable = true;
+  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
