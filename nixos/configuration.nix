@@ -117,7 +117,6 @@
   services.nscd.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -146,7 +145,30 @@
   };
   users.defaultUserShell = pkgs.zsh;
 
-  # Enable some programs that we want
+  # Hyprland
+  programs.hyprland = {
+    enable = true;
+    nvidiaPatches = true; # fuck nvidia
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    # If your cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  hardware = {
+    # OpenGL
+    opengl.enable = true;
+
+    # Most wayland compositors need this 
+    nvidia.modesetting.enable = true;
+
+    # Pulseaudio
+    pulseaudio.enable = false;
+  };
 
   # ZSH
   programs.zsh = {
@@ -178,13 +200,28 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     # System
      home-manager
+
+     # Development 
+     nodejs_22
+     rustup
+     gcc
+     gnumake
+     lua
+     python3
+     pipx
+     go
+ 
+     # Binaries
      neofetch
      vim 
      wget
      curl
      git
      htop
+     unzip
+     stow
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

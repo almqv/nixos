@@ -57,20 +57,6 @@
     irssi
     spotify
 
-    # Development 
-    nodejs_22
-    rustup
-    gcc
-    gnumake
-    lua
-    python3
-    pipx
-    go
-
-    # Binaries
-    unzip
-    stow
-
     # Fonts
     nerdfonts
     
