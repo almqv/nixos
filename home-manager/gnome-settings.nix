@@ -7,7 +7,15 @@
 
   "org/gnome/desktop/peripherals/touchpad" = {
     click-method = "areas";
+    natural-scroll = false;
     two-finger-scrolling-enabled = true;
+    speed = -0.1;
+  };
+
+  "org/gnome/desktop/peripherals/mouse" = {
+    accel-profile = "flat";
+    natural-scroll = false;
+    speed = -0.4;
   };
 
   "org/gnome/desktop/privacy" = {
