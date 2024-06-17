@@ -112,9 +112,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # systemd-homed
-  services.homed.enable = true;
-  services.nscd.enable = true;
+  # Blueman (bluetooth manager)
+  services.blueman.enable = true;
 
   # Enable sound with pipewire.
   security.rtkit.enable = true;
@@ -167,6 +166,10 @@
 
     # Pulseaudio
     pulseaudio.enable = false;
+
+    # Bluetooth
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
   };
 
   # ZSH
@@ -204,12 +207,16 @@
 
      # Rice stuff
      eww          # bar/widgets
+     waybar       # bar
      dunst        # notifications
      libnotify    # library for notifications
      swww         # wallpaper
      alacritty    # terminal
      kitty        # TODO: remove me
      rofi-wayland # app launcher
+
+     # Rice programs
+     dolphin
 
      # Development 
      nodejs_22
