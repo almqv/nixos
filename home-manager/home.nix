@@ -14,7 +14,6 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    # ./gnome-settings.nix
     inputs.nix-colors.homeManagerModules.default
     ./features/alacritty.nix
   ];
@@ -49,9 +48,6 @@
     homeDirectory = "/home/elal";
   };
 
-  # Use these predefined settings for gnome
-  # dconf.settings = import ./gnome-settings.nix;
-
   # Hyprland
 #   wayland.windowManager.hyprland = {
 #     enable = true;
@@ -62,6 +58,39 @@
 #       };
 #     };
 #   };
+
+  # Waybar 
+  programs.waybar = {
+    enable = true;
+
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        output = [
+          "eDP-1"
+        ];
+        modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
+        modules-center = [ "sway/window" "custom/hello-from-waybar" ];
+        modules-right = [ "mpd" "custom/mymodule#with-css-id" "temperature" ];
+
+        "sway/workspaces" = {
+          disable-scroll = true;
+          all-outputs = true;
+        };
+        "custom/hello-from-waybar" = {
+          format = "hello {}";
+          max-length = 40;
+          interval = "once";
+          exec = pkgs.writeShellScript "hello-from-waybar" ''
+            echo "from within waybar"
+          '';
+        };
+      };
+    };
+  };
+
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
@@ -75,9 +104,6 @@
 
     # Fonts
     nerdfonts
-    
-    # DE
-    gnome.gnome-tweaks
 
     # Useful things 
     wl-clipboard
