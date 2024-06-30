@@ -179,6 +179,11 @@
       enable = true;
       theme = "half-life";
     };
+    shellAliases = {
+      cpc = "wl-copy";
+      pac = "wl-paste";
+      ccd = "pwd | cpc";
+    };
   };
 
   # Firefox
